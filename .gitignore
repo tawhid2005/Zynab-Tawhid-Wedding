@@ -1,0 +1,11 @@
+# Scratch & temporary media
+scratch/
+*.mp4
+temp_ref_video.mp4
+*.py
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
