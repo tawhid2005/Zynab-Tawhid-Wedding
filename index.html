@@ -528,25 +528,78 @@
     <!-- ========================================== -->
     <!-- SECTION 3: WELCOME NOTE (DEEP BURGUNDY) -->
     <!-- ========================================== -->
-    <section id="welcome" class="burgundy-texture relative text-white px-7 pt-12 pb-12 text-center z-10 -mt-[1px]">
-      <div class="max-w-[360px] mx-auto">
-        <!-- Script Heading -->
-        <h2 class="font-script text-4xl sm:text-5xl text-white mb-6 drop-shadow">
-          Dear Friends and Family,
-        </h2>
+    <section id="welcome" class="burgundy-texture relative text-white px-5 pt-12 pb-12 text-center z-10 -mt-[1px]">
+      <div class="max-w-[380px] mx-auto">
+        <!-- Section Sub-Header -->
+        <div class="mb-6">
+          <p class="font-cinzel text-[10px] tracking-[0.25em] text-[#C5A059] uppercase font-semibold">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
+          <h2 class="font-script text-4xl sm:text-5xl text-white mt-1 drop-shadow">
+            The Blessed Couple
+          </h2>
+          <div class="flex items-center justify-center gap-3 my-2">
+            <div class="w-8 h-[1px] bg-gradient-to-r from-transparent to-[#D4AF37]"></div>
+            <i class="fa-solid fa-heart text-[#D4AF37] text-xs"></i>
+            <div class="w-8 h-[1px] bg-gradient-to-l from-transparent to-[#D4AF37]"></div>
+          </div>
+        </div>
+
+        <!-- Portraits Grid: Groom & Bride Side-by-Side -->
+        <div class="grid grid-cols-2 gap-3.5 mb-8">
+          <!-- Groom Card -->
+          <div class="bg-black/35 backdrop-blur-sm p-2 rounded-2xl border border-[#C5A059]/40 shadow-xl transition-all duration-300 hover:border-[#C5A059]">
+            <div class="relative overflow-hidden rounded-xl border border-[#C5A059]/30 aspect-[3/4] bg-neutral-900 shadow-inner">
+              <img src="assets/groom_portrait.jpg" alt="Md Talha Hussain Tawhid - Groom"
+                class="w-full h-full object-cover object-top filter brightness-[0.98] contrast-[1.03]" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent"></div>
+              <span class="absolute bottom-1.5 inset-x-0 text-center font-cinzel text-[9px] tracking-widest uppercase text-[#F3E5AB] font-semibold">
+                The Groom
+              </span>
+            </div>
+            <div class="mt-2.5 text-center">
+              <h3 class="font-serif text-base sm:text-lg font-bold text-white leading-tight">
+                Md Talha Hussain Tawhid
+              </h3>
+              <p class="font-serif text-xs text-[#F3E5AB]/90 italic mt-0.5">
+                Son of Md Jamil Hussain
+              </p>
+            </div>
+          </div>
+
+          <!-- Bride Card -->
+          <div class="bg-black/35 backdrop-blur-sm p-2 rounded-2xl border border-[#C5A059]/40 shadow-xl transition-all duration-300 hover:border-[#C5A059]">
+            <div class="relative overflow-hidden rounded-xl border border-[#C5A059]/30 aspect-[3/4] bg-neutral-900 shadow-inner">
+              <img src="assets/bride_portrait.jpg" alt="Zaynab Zuhra - Bride"
+                class="w-full h-full object-cover object-top filter brightness-[0.98] contrast-[1.03]" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent"></div>
+              <span class="absolute bottom-1.5 inset-x-0 text-center font-cinzel text-[9px] tracking-widest uppercase text-[#F3E5AB] font-semibold">
+                The Bride
+              </span>
+            </div>
+            <div class="mt-2.5 text-center">
+              <h3 class="font-serif text-base sm:text-lg font-bold text-white leading-tight">
+                Zaynab Zuhra
+              </h3>
+              <p class="font-serif text-xs text-[#F3E5AB]/90 italic mt-0.5">
+                Daughter of Ahmed Abubakkar
+              </p>
+            </div>
+          </div>
+        </div>
 
         <!-- Heartfelt Islamic Welcome Note -->
-        <p class="font-serif text-base sm:text-lg text-white/95 leading-relaxed tracking-wide italic font-light mb-6">
-          &ldquo;In the name of Allah, the Most Gracious, the Most Merciful. As we get ready to begin our blessed
-          journey together, we feel grateful for the wonderful people in our lives. Your prayers and presence mean the
-          world to us, and we would be honored to have you with us at our Nikah ceremony.&rdquo;
-        </p>
-
-        <!-- Monogram signature -->
-        <div class="inline-flex flex-col items-center">
-          <span class="font-script text-3xl text-[#F3E5AB]">Zaynab &amp; Tawhid</span>
-          <span class="font-cinzel text-[10px] tracking-[0.25em] uppercase text-white/70 mt-1">Request the honor of your
-            company</span>
+        <div class="pt-5 border-t border-[#C5A059]/30">
+          <h3 class="font-script text-3xl sm:text-4xl text-white mb-3 drop-shadow">
+            Dear Friends and Family,
+          </h3>
+          <p class="font-serif text-sm sm:text-base text-white/95 leading-relaxed tracking-wide italic font-light mb-5">
+            &ldquo;In the name of Allah, the Most Gracious, the Most Merciful. As we get ready to begin our blessed
+            journey together, we feel grateful for the wonderful people in our lives. Your prayers and presence mean the
+            world to us, and we would be honored to have you with us at our Nikah ceremony.&rdquo;
+          </p>
+          <div class="inline-flex flex-col items-center">
+            <span class="font-script text-2xl text-[#F3E5AB]">Zaynab &amp; Tawhid</span>
+            <span class="font-cinzel text-[9px] tracking-[0.25em] uppercase text-white/70 mt-0.5">Request the honor of your company</span>
+          </div>
         </div>
       </div>
     </section>
@@ -631,53 +684,53 @@
         <!-- Timeline Items List with Diamonds matching Video -->
         <div class="space-y-12 relative z-15">
 
-          <!-- Event 1: 13:30 -->
+          <!-- Event 1: 01:30 PM -->
           <div class="grid grid-cols-2 gap-8 items-center relative">
             <!-- White diamond on center line -->
             <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-[9px] z-12">
               <i class="fa-solid fa-diamond"></i>
             </div>
             <div class="text-right pr-4">
-              <span class="font-serif text-xl sm:text-2xl text-white tracking-wider block">13:30</span>
+              <span class="font-serif text-lg sm:text-xl text-white tracking-wider block">01:30 <span class="text-xs uppercase text-[#F3E5AB]">PM</span></span>
             </div>
             <div class="text-left pl-4">
               <h3 class="font-serif text-base sm:text-lg text-white">Guest Arrival</h3>
             </div>
           </div>
 
-          <!-- Event 2: 14:00 (Nikah) -->
+          <!-- Event 2: 02:00 PM (Nikah) -->
           <div class="grid grid-cols-2 gap-8 items-center relative">
             <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-[9px] z-12">
               <i class="fa-solid fa-diamond"></i>
             </div>
             <div class="text-right pr-4">
-              <span class="font-serif text-xl sm:text-2xl text-white tracking-wider block">14:00</span>
+              <span class="font-serif text-lg sm:text-xl text-white tracking-wider block">02:00 <span class="text-xs uppercase text-[#F3E5AB]">PM</span></span>
             </div>
             <div class="text-left pl-4">
               <h3 class="font-serif text-base sm:text-lg text-white">Blessed Nikah Ceremony</h3>
             </div>
           </div>
 
-          <!-- Event 3: 15:00 -->
+          <!-- Event 3: 03:00 PM -->
           <div class="grid grid-cols-2 gap-8 items-center relative">
             <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-[9px] z-12">
               <i class="fa-solid fa-diamond"></i>
             </div>
             <div class="text-right pr-4">
-              <span class="font-serif text-xl sm:text-2xl text-white tracking-wider block">15:00</span>
+              <span class="font-serif text-lg sm:text-xl text-white tracking-wider block">03:00 <span class="text-xs uppercase text-[#F3E5AB]">PM</span></span>
             </div>
             <div class="text-left pl-4">
               <h3 class="font-serif text-base sm:text-lg text-white">Wedding Feast</h3>
             </div>
           </div>
 
-          <!-- Event 4: 16:30 -->
+          <!-- Event 4: 04:30 PM -->
           <div class="grid grid-cols-2 gap-8 items-center relative">
             <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-[9px] z-12">
               <i class="fa-solid fa-diamond"></i>
             </div>
             <div class="text-right pr-4">
-              <span class="font-serif text-xl sm:text-2xl text-white tracking-wider block">16:30</span>
+              <span class="font-serif text-lg sm:text-xl text-white tracking-wider block">04:30 <span class="text-xs uppercase text-[#F3E5AB]">PM</span></span>
             </div>
             <div class="text-left pl-4">
               <h3 class="font-serif text-base sm:text-lg text-white">Dua &amp; Farewell</h3>
@@ -727,11 +780,16 @@
           </a>
         </div>
 
-        <!-- Architectural Fine-Line Sketch Illustration -->
-        <div class="mt-6 p-2 bg-white/90 rounded-xl border border-[#d8ccbe] shadow-md">
-          <div class="relative overflow-hidden rounded-lg border border-[#e8dccb]">
-            <img src="assets/hall_sketch.jpg" alt="Architectural sketch of Kushiara International Convention Hall"
-              class="w-full h-auto object-cover filter contrast-[1.05]" />
+        <!-- Real Venue Photo: Kushiara International Convention Hall -->
+        <div class="mt-6 p-2.5 bg-white/95 rounded-2xl border border-[#d8ccbe] shadow-xl">
+          <div class="relative overflow-hidden rounded-xl border border-[#C5A059]/40 shadow-inner group">
+            <img src="assets/kushiara_hall.png" alt="Kushiara International Convention Hall, Sylhet"
+              class="w-full h-auto object-cover filter contrast-[1.04] brightness-[0.98] transition-transform duration-500 group-hover:scale-105" />
+            <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/85 via-black/45 to-transparent p-2.5 pt-6 text-center">
+              <span class="font-cinzel text-[10px] tracking-widest text-[#F3E5AB] uppercase font-semibold">
+                Official Venue &bull; Kushiara International Convention Hall
+              </span>
+            </div>
           </div>
         </div>
       </div>
