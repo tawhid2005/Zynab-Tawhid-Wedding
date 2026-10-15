@@ -1699,42 +1699,72 @@
 
   <script>
     (function () {
-      const music  = document.getElementById('bgMusic');
-      const btn    = document.getElementById('musicToggleBtn');
-      const icon   = document.getElementById('musicIcon');
+      const music = document.getElementById('bgMusic');
+      const btn   = document.getElementById('musicToggleBtn');
+      const icon  = document.getElementById('musicIcon');
 
-      // Soft volume — feels ambient, not loud
-      music.volume = 0.18;
+      const TARGET_VOLUME = 0.07;   // খুব soft — ambient feel
+      const FADE_DURATION = 4000;   // 4 সেকেন্ডে আস্তে আস্তে বাড়বে
+      const FADE_STEPS    = 80;
 
       let started = false;
+      let fadeTimer = null;
 
-      // Start music on the very first user interaction (browser policy)
+      // Smooth fade-in from 0 → TARGET_VOLUME
+      function fadeIn() {
+        music.volume = 0;
+        let step = 0;
+        const increment = TARGET_VOLUME / FADE_STEPS;
+        const interval  = FADE_DURATION / FADE_STEPS;
+        clearInterval(fadeTimer);
+        fadeTimer = setInterval(function () {
+          step++;
+          music.volume = Math.min(+(music.volume + increment).toFixed(4), TARGET_VOLUME);
+          if (step >= FADE_STEPS) clearInterval(fadeTimer);
+        }, interval);
+      }
+
+      // Smooth fade-out → 0 then pause
+      function fadeOut() {
+        clearInterval(fadeTimer);
+        const decrement = music.volume / FADE_STEPS;
+        const interval  = 1500 / FADE_STEPS;
+        fadeTimer = setInterval(function () {
+          if (music.volume > decrement) {
+            music.volume = Math.max(+(music.volume - decrement).toFixed(4), 0);
+          } else {
+            music.volume = 0;
+            music.pause();
+            clearInterval(fadeTimer);
+          }
+        }, interval);
+      }
+
+      // Start on first user interaction (browser autoplay policy)
       function startMusic() {
         if (started) return;
         started = true;
-        music.play().catch(() => {});
-        ['click','touchstart','keydown'].forEach(e =>
+        music.play().then(fadeIn).catch(() => {});
+        ['click', 'touchstart', 'keydown'].forEach(e =>
           document.removeEventListener(e, startMusic)
         );
       }
 
-      ['click','touchstart','keydown'].forEach(e =>
+      ['click', 'touchstart', 'keydown'].forEach(e =>
         document.addEventListener(e, startMusic, { once: false, passive: true })
       );
 
       // Toggle button
       btn.addEventListener('click', function (e) {
-        e.stopPropagation();   // don't double-trigger startMusic via the doc listener
-        if (!started) {
-          startMusic();
-          return;
-        }
+        e.stopPropagation();
+        if (!started) { startMusic(); return; }
+
         if (music.paused) {
-          music.play().catch(() => {});
+          music.play().then(fadeIn).catch(() => {});
           btn.classList.remove('paused');
           icon.className = 'fa-solid fa-music';
         } else {
-          music.pause();
+          fadeOut();
           btn.classList.add('paused');
           icon.className = 'fa-solid fa-pause';
         }
