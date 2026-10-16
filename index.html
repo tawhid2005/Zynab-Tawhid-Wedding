@@ -1644,65 +1644,14 @@
 
   <!-- ===== Background Music ===== -->
   <audio id="bgMusic" loop preload="auto">
-    <source src="assets/wedding_music.mp3?v=4" type="audio/mpeg">
+    <source src="assets/wedding_music.mp3?v=5" type="audio/mpeg">
   </audio>
-
-  <!-- Floating Music Toggle Button -->
-  <button id="musicToggleBtn" title="Toggle Music" aria-label="Toggle background music">
-    <i class="fa-solid fa-music" id="musicIcon"></i>
-  </button>
-
-  <style>
-    #musicToggleBtn {
-      position: fixed;
-      bottom: 28px;
-      right: 24px;
-      z-index: 9999;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      border: none;
-      cursor: pointer;
-      background: linear-gradient(135deg, #c9a96e, #e8d5a3, #b8860b);
-      color: #3b2a1a;
-      font-size: 18px;
-      box-shadow: 0 4px 20px rgba(185, 148, 70, 0.55), 0 0 0 0 rgba(201, 169, 110, 0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      animation: musicPulse 2.8s ease-in-out infinite;
-    }
-    #musicToggleBtn:hover {
-      transform: scale(1.12);
-      box-shadow: 0 6px 28px rgba(185, 148, 70, 0.75);
-    }
-    #musicToggleBtn.paused {
-      opacity: 0.65;
-      animation: none;
-    }
-    @keyframes musicPulse {
-      0%, 100% { box-shadow: 0 4px 20px rgba(185,148,70,0.55), 0 0 0 0 rgba(201,169,110,0.45); }
-      50%       { box-shadow: 0 4px 20px rgba(185,148,70,0.55), 0 0 0 10px rgba(201,169,110,0); }
-    }
-  </style>
 
   <script>
     (function () {
-      var music = document.getElementById('bgMusic');
-      var btn   = document.getElementById('musicToggleBtn');
-      var icon  = document.getElementById('musicIcon');
-
-      // ভলিউম সরাসরি সেট — 0.04 = খুব আস্তে
+      var music    = document.getElementById('bgMusic');
       var SOFT_VOL = 0.04;
       music.volume = SOFT_VOL;
-
-      // প্রতি মুহূর্তে volume enforce করো যাতে কেউ বদলাতে না পারে
-      music.addEventListener('volumechange', function () {
-        if (music.volume !== SOFT_VOL && !music._userChanged) {
-          music.volume = SOFT_VOL;
-        }
-      });
 
       var started = false;
 
@@ -1717,28 +1666,6 @@
       document.addEventListener('click',      startMusic, { once: true });
       document.addEventListener('touchstart', startMusic, { once: true, passive: true });
       document.addEventListener('keydown',    startMusic, { once: true });
-
-      // Toggle button
-      btn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        music.volume = SOFT_VOL;
-
-        if (!started) {
-          startMusic();
-          return;
-        }
-
-        if (music.paused) {
-          music.volume = SOFT_VOL;
-          music.play().catch(function () {});
-          btn.classList.remove('paused');
-          icon.className = 'fa-solid fa-music';
-        } else {
-          music.pause();
-          btn.classList.add('paused');
-          icon.className = 'fa-solid fa-pause';
-        }
-      });
     })();
   </script>
 </body>
