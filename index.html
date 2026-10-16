@@ -1644,7 +1644,7 @@
 
   <!-- ===== Background Music ===== -->
   <audio id="bgMusic" loop preload="auto">
-    <source src="assets/wedding_music.mp3?v=3" type="audio/mpeg">
+    <source src="assets/wedding_music.mp3?v=4" type="audio/mpeg">
   </audio>
 
   <!-- Floating Music Toggle Button -->
@@ -1675,96 +1675,66 @@
     }
     #musicToggleBtn:hover {
       transform: scale(1.12);
-      box-shadow: 0 6px 28px rgba(185, 148, 70, 0.75), 0 0 0 0 rgba(201, 169, 110, 0.5);
+      box-shadow: 0 6px 28px rgba(185, 148, 70, 0.75);
     }
     #musicToggleBtn.paused {
       opacity: 0.65;
       animation: none;
     }
-    #musicIcon {
-      transition: transform 0.4s ease;
-    }
-    #musicToggleBtn:not(.paused) #musicIcon {
-      animation: iconSpin 6s linear infinite;
-    }
     @keyframes musicPulse {
       0%, 100% { box-shadow: 0 4px 20px rgba(185,148,70,0.55), 0 0 0 0 rgba(201,169,110,0.45); }
-      50%        { box-shadow: 0 4px 20px rgba(185,148,70,0.55), 0 0 0 10px rgba(201,169,110,0); }
-    }
-    @keyframes iconSpin {
-      0%   { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      50%       { box-shadow: 0 4px 20px rgba(185,148,70,0.55), 0 0 0 10px rgba(201,169,110,0); }
     }
   </style>
 
   <script>
     (function () {
-      const music = document.getElementById('bgMusic');
-      const btn   = document.getElementById('musicToggleBtn');
-      const icon  = document.getElementById('musicIcon');
+      var music = document.getElementById('bgMusic');
+      var btn   = document.getElementById('musicToggleBtn');
+      var icon  = document.getElementById('musicIcon');
 
-      const TARGET_VOLUME = 0.03;   // whisper-level soft — ambient feel
-      const FADE_DURATION = 4000;   // 4 সেকেন্ডে আস্তে আস্তে বাড়বে
-      const FADE_STEPS    = 80;
+      // ভলিউম সরাসরি সেট — 0.04 = খুব আস্তে
+      var SOFT_VOL = 0.04;
+      music.volume = SOFT_VOL;
 
-      let started = false;
-      let fadeTimer = null;
+      // প্রতি মুহূর্তে volume enforce করো যাতে কেউ বদলাতে না পারে
+      music.addEventListener('volumechange', function () {
+        if (music.volume !== SOFT_VOL && !music._userChanged) {
+          music.volume = SOFT_VOL;
+        }
+      });
 
-      // Smooth fade-in from 0 → TARGET_VOLUME
-      function fadeIn() {
-        music.volume = 0;
-        let step = 0;
-        const increment = TARGET_VOLUME / FADE_STEPS;
-        const interval  = FADE_DURATION / FADE_STEPS;
-        clearInterval(fadeTimer);
-        fadeTimer = setInterval(function () {
-          step++;
-          music.volume = Math.min(+(music.volume + increment).toFixed(4), TARGET_VOLUME);
-          if (step >= FADE_STEPS) clearInterval(fadeTimer);
-        }, interval);
-      }
+      var started = false;
 
-      // Smooth fade-out → 0 then pause
-      function fadeOut() {
-        clearInterval(fadeTimer);
-        const decrement = music.volume / FADE_STEPS;
-        const interval  = 1500 / FADE_STEPS;
-        fadeTimer = setInterval(function () {
-          if (music.volume > decrement) {
-            music.volume = Math.max(+(music.volume - decrement).toFixed(4), 0);
-          } else {
-            music.volume = 0;
-            music.pause();
-            clearInterval(fadeTimer);
-          }
-        }, interval);
-      }
-
-      // Start on first user interaction (browser autoplay policy)
       function startMusic() {
         if (started) return;
+        music.volume = SOFT_VOL;
+        music.play().catch(function () {});
         started = true;
-        music.play().then(fadeIn).catch(() => {});
-        ['click', 'touchstart', 'keydown'].forEach(e =>
-          document.removeEventListener(e, startMusic)
-        );
       }
 
-      ['click', 'touchstart', 'keydown'].forEach(e =>
-        document.addEventListener(e, startMusic, { once: false, passive: true })
-      );
+      // প্রথম যেকোনো interaction-এ শুরু
+      document.addEventListener('click',      startMusic, { once: true });
+      document.addEventListener('touchstart', startMusic, { once: true, passive: true });
+      document.addEventListener('keydown',    startMusic, { once: true });
 
       // Toggle button
       btn.addEventListener('click', function (e) {
         e.stopPropagation();
-        if (!started) { startMusic(); return; }
+        music.volume = SOFT_VOL;
+
+        if (!started) {
+          startMusic();
+          return;
+        }
 
         if (music.paused) {
-          music.play().then(fadeIn).catch(() => {});
+          music.volume = SOFT_VOL;
+          music.play().catch(function () {});
           btn.classList.remove('paused');
           icon.className = 'fa-solid fa-music';
         } else {
-          fadeOut();
+          music.pause();
           btn.classList.add('paused');
           icon.className = 'fa-solid fa-pause';
         }
